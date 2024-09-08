@@ -28,37 +28,66 @@ document
       const Generate = `
       <section>
       <h2>Resume</h2> 
-      <p><strong>Name:</strong> ${name}</p> <!-- Fixed missing '>' -->
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Contact Number:</strong> ${contactnumber}</p>
+      <p><strong>Name:</strong> <span id="edit-name" class="editable"> ${name} </span> </p> <!-- Fixed missing '>' -->
+      <p><strong>Email:</strong> <span id="edit-email" class="editable"> ${email} </span> </p>
+      <p><strong>Contact Number:</strong> <span id="edit-contectnumber" class="editable"> </span> ${contactnumber}</p>
     </section>
 
     <section>
     <h3>Education</h3>
-    <p>${education}</p> 
+    <p id="edit-education" class="editable">${education}</p> 
     </section>
     
     <section>
     <h3>Skills</h3>
-    <p>${skills}</p>
+    <p id="edit-skills" class="editable">${skills}</p>
     </section>
     
     <section>
     <h3>Experience</h3>
-    <p>${workexperience}</p>
+    <p id="edit-experience" class="editable">${workexperience}</p>
     </section>
         `;
 
       const GenerateElement = document.getElementById("Generate")
       if (GenerateElement) {
-        GenerateElement.innerHTML = Generate
-      } else {
-        console.error("the resume output elements are missing");
+      GenerateElement.innerHTML = Generate;
+      makeEditable();
       }
     } else {
       console.error("one or more output");
     }
   });
 
+
+function makeEditable() {
+  const editableElements = document.querySelectorAll('.editable');
+  editableElements.forEach(element => {
+    element.addEventListener('click' , function() {
+      const currentElement = element as HTMLElement;
+      const currentValue = currentElement.textContent || "";
+
+      if (currentElement.tagName === "p" || currentElement.tagName === 'SPAN') {
+         const input = document.createElement('input')
+         input.type ='text'
+         input.value = currentValue
+         input.classList.add('editing-input')
+
+         input.addEventListener('blur' , function() {
+          currentElement.textContent = input.value;
+          currentElement.style.display = 'inline'
+          input.remove()
+         })
+
+
+         currentElement.style.display = 'none'
+         currentElement.parentNode?. insertBefore(input, currentElement)
+         input.focus()
+
+      }
+    })
+  })
+
+}
 
 
