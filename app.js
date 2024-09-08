@@ -10,25 +10,34 @@ var _a;
     var educationElement = document.getElementById("education");
     var skillsElement = document.getElementById("skills");
     var workexperienceElement = document.getElementById("workexperience"); // Fix ID here
+    var usernameElement = document.getElementById("username");
     if (profilepictureInput &&
         nameElement &&
         emailElement &&
         contactnumberElement &&
         educationElement &&
         skillsElement &&
-        workexperienceElement) {
+        workexperienceElement &&
+        usernameElement) {
         var name_1 = nameElement.value;
         var email = emailElement.value;
         var contactnumber = contactnumberElement.value;
         var education = educationElement.value;
         var skills = skillsElement.value;
         var workexperience = workexperienceElement.value;
+        var username = usernameElement.value;
+        var uniquePath = "resumes/".concat(username.replace(/\s*/g, '_'), "_cv.html");
         var profilephotoFile = (_a = profilepictureInput.files) === null || _a === void 0 ? void 0 : _a[0];
         var profilephotoURL = profilephotoFile ? URL.createObjectURL(profilephotoFile) : "";
         var Generate = "\n      ".concat(profilephotoURL ? "<img src=\"".concat(profilephotoURL, "\" alt=\"profilephoto\" class=\"profilephoto\">") : '', "\n      <section>\n      <h2>Resume</h2> \n      <p><strong>Name:</strong> <span id=\"edit-name\" class=\"editable\"> ").concat(name_1, " </span> </p> <!-- Fixed missing '>' -->\n      <p><strong>Email:</strong> <span id=\"edit-email\" class=\"editable\"> ").concat(email, " </span> </p>\n      <p><strong>Contact Number:</strong> <span id=\"edit-contectnumber\" class=\"editable\"> </span> ").concat(contactnumber, "</p>\n    </section>\n\n    <section>\n    <h3>Education</h3>\n    <p id=\"edit-education\" class=\"editable\">").concat(education, "</p> \n    </section>\n    \n    <section>\n    <h3>Skills</h3>\n    <p id=\"edit-skills\" class=\"editable\">").concat(skills, "</p>\n    </section>\n    \n    <section>\n    <h3>Experience</h3>\n    <p id=\"edit-experience\" class=\"editable\">").concat(workexperience, "</p>\n    </section>\n        ");
+        var downloadLink = document.createElement('a');
+        downloadLink.href = 'data:text/html;charset=utf-8,' + encodeURIComponent(Generate);
+        downloadLink.download = uniquePath;
+        downloadLink.textContent = 'Download Resume';
         var GenerateElement = document.getElementById("Generate");
         if (GenerateElement) {
             GenerateElement.innerHTML = Generate;
+            GenerateElement.appendChild(downloadLink);
             GenerateElement.style.display = 'block';
         }
     }

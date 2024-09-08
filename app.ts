@@ -13,6 +13,7 @@ document
   const educationElement = document.getElementById("education") as HTMLTextAreaElement;
   const skillsElement = document.getElementById("skills") as HTMLTextAreaElement;
   const workexperienceElement = document.getElementById("workexperience") as HTMLTextAreaElement; // Fix ID here
+  const usernameElement = document.getElementById("username") as HTMLInputElement;
 
     if (
       profilepictureInput &&
@@ -21,7 +22,10 @@ document
       contactnumberElement &&
       educationElement &&
       skillsElement &&
-      workexperienceElement
+      workexperienceElement &&
+      usernameElement
+
+
     ){
       const name = nameElement.value;
       const email = emailElement.value;
@@ -29,6 +33,8 @@ document
       const education = educationElement.value;
       const skills = skillsElement.value;
       const workexperience = workexperienceElement.value;
+      const username = usernameElement.value;
+      const uniquePath = `resumes/${username.replace(/\s*/g, '_')}_cv.html`
 
 
       const profilephotoFile = profilepictureInput.files?.[0]
@@ -59,11 +65,19 @@ document
     <p id="edit-experience" class="editable">${workexperience}</p>
     </section>
         `;
+
+      const downloadLink = document.createElement('a')
+      downloadLink.href ='data:text/html;charset=utf-8,' + encodeURIComponent(Generate)
+      downloadLink.download = uniquePath;
+      downloadLink.textContent = 'Download Resume'
+
       
 
       const GenerateElement = document.getElementById("Generate")
       if (GenerateElement) {
       GenerateElement.innerHTML = Generate;
+
+      GenerateElement.appendChild(downloadLink)
       GenerateElement.style.display ='block';
       }
     } else {
