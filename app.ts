@@ -9,10 +9,10 @@ document
 
   const nameElement = document.getElementById("name") as HTMLInputElement;
   const emailElement = document.getElementById("email") as HTMLInputElement;
-  const contactnumberElement = document.getElementById("contactnumber") as HTMLInputElement; // Fix ID here
+  const contactnumberElement = document.getElementById("contactnumber") as HTMLInputElement; 
   const educationElement = document.getElementById("education") as HTMLTextAreaElement;
   const skillsElement = document.getElementById("skills") as HTMLTextAreaElement;
-  const workexperienceElement = document.getElementById("workexperience") as HTMLTextAreaElement; // Fix ID here
+  const workexperienceElement = document.getElementById("workexperience") as HTMLTextAreaElement; 
   const usernameElement = document.getElementById("username") as HTMLInputElement;
 
     if (
@@ -45,7 +45,7 @@ document
       ${profilephotoURL ? `<img src="${profilephotoURL}" alt="profilephoto" class="profilephoto">` : ''}
       <section>
       <h2>Resume</h2> 
-      <p><strong>Name:</strong> <span id="edit-name" class="editable"> ${name} </span> </p> <!-- Fixed missing '>' -->
+      <p><strong>Name:</strong> <span id="edit-name" class="editable"> ${name} </span> </p> 
       <p><strong>Email:</strong> <span id="edit-email" class="editable"> ${email} </span> </p>
       <p><strong>Contact Number:</strong> <span id="edit-contectnumber" class="editable"> </span> ${contactnumber}</p>
     </section>
@@ -86,38 +86,38 @@ document
   });
 
 
-// function makeEditable() {
-//   const editableElements = document.querySelectorAll('.editable');
-//   editableElements.forEach(element => {
-//     element.addEventListener('click' , function() {
-//       const currentElement = element as HTMLElement;
-//       const currentValue = currentElement.textContent || "";
+function makeEditable() {
+  const editableElements = document.querySelectorAll('.editable');
+  editableElements.forEach(element => {
+    element.addEventListener('click' , function() {
+      const currentElement = element as HTMLElement;
+      const currentValue = currentElement.textContent || "";
 
-//       if (currentElement.tagName === "p" || currentElement.tagName === 'SPAN') {
-//          const input = document.createElement('input')
-//          input.type ='text'
-//          input.value = currentValue
-//          input.classList.add('editing-input')
+      if (currentElement.tagName === "p" || currentElement.tagName === 'SPAN') {
+         const input = document.createElement('input')
+         input.type ='text'
+         input.value = currentValue
+         input.classList.add('editing-input')
 
-//          input.addEventListener('blur' , function() {
-//           currentElement.textContent = input.value;
-//           currentElement.style.display = 'inline'
-//           input.remove()
-//          })
+         input.addEventListener('blur' , function() {
+          currentElement.textContent = input.value;
+          currentElement.style.display = 'inline'
+          input.remove()
+         })
 
   
 
 
 
 
-        //  currentElement.style.display = 'none'
-        //  currentElement.parentNode?. insertBefore(input, currentElement)
-        //  input.focus()
+         currentElement.style.display = 'none'
+         currentElement.parentNode?. insertBefore(input, currentElement)
+         input.focus()
 
-// }
-// })
-// })
+}
+})
+})
 
-// }
+}
 
 
