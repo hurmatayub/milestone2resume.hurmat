@@ -58,8 +58,18 @@ button[type="submit"]:hover {
 }
 
 
-
-
 #Generate h2 {
   color: black;
+}
+
+.profilephoto {
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #0eaa6e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0, 0.6);
+  border-radius: 500%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  
 }

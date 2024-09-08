@@ -3,7 +3,11 @@ document
   ?.addEventListener("submit", function(event) {
     event.preventDefault();
 
-   const nameElement = document.getElementById("name") as HTMLInputElement;
+
+  const profilepictureInput = document.getElementById('profilephoto') as HTMLInputElement;
+
+
+  const nameElement = document.getElementById("name") as HTMLInputElement;
   const emailElement = document.getElementById("email") as HTMLInputElement;
   const contactnumberElement = document.getElementById("contactnumber") as HTMLInputElement; // Fix ID here
   const educationElement = document.getElementById("education") as HTMLTextAreaElement;
@@ -11,13 +15,14 @@ document
   const workexperienceElement = document.getElementById("workexperience") as HTMLTextAreaElement; // Fix ID here
 
     if (
+      profilepictureInput &&
       nameElement &&
       emailElement &&
       contactnumberElement &&
       educationElement &&
       skillsElement &&
       workexperienceElement
-    ) {
+    ){
       const name = nameElement.value;
       const email = emailElement.value;
       const contactnumber = contactnumberElement.value;
@@ -25,7 +30,13 @@ document
       const skills = skillsElement.value;
       const workexperience = workexperienceElement.value;
 
+
+      const profilephotoFile = profilepictureInput.files?.[0]
+      const profilephotoURL = profilephotoFile? URL.createObjectURL(profilephotoFile) : "";
+
+
       const Generate = `
+      ${profilephotoURL ? `<img src="${profilephotoURL}" alt="profilephoto" class="profilephoto">` : ''}
       <section>
       <h2>Resume</h2> 
       <p><strong>Name:</strong> <span id="edit-name" class="editable"> ${name} </span> </p> <!-- Fixed missing '>' -->
@@ -48,11 +59,12 @@ document
     <p id="edit-experience" class="editable">${workexperience}</p>
     </section>
         `;
+      
 
       const GenerateElement = document.getElementById("Generate")
       if (GenerateElement) {
       GenerateElement.innerHTML = Generate;
-      makeEditable();
+      GenerateElement.style.display ='block';
       }
     } else {
       console.error("one or more output");
@@ -60,34 +72,38 @@ document
   });
 
 
-function makeEditable() {
-  const editableElements = document.querySelectorAll('.editable');
-  editableElements.forEach(element => {
-    element.addEventListener('click' , function() {
-      const currentElement = element as HTMLElement;
-      const currentValue = currentElement.textContent || "";
+// function makeEditable() {
+//   const editableElements = document.querySelectorAll('.editable');
+//   editableElements.forEach(element => {
+//     element.addEventListener('click' , function() {
+//       const currentElement = element as HTMLElement;
+//       const currentValue = currentElement.textContent || "";
 
-      if (currentElement.tagName === "p" || currentElement.tagName === 'SPAN') {
-         const input = document.createElement('input')
-         input.type ='text'
-         input.value = currentValue
-         input.classList.add('editing-input')
+//       if (currentElement.tagName === "p" || currentElement.tagName === 'SPAN') {
+//          const input = document.createElement('input')
+//          input.type ='text'
+//          input.value = currentValue
+//          input.classList.add('editing-input')
 
-         input.addEventListener('blur' , function() {
-          currentElement.textContent = input.value;
-          currentElement.style.display = 'inline'
-          input.remove()
-         })
+//          input.addEventListener('blur' , function() {
+//           currentElement.textContent = input.value;
+//           currentElement.style.display = 'inline'
+//           input.remove()
+//          })
+
+  
 
 
-         currentElement.style.display = 'none'
-         currentElement.parentNode?. insertBefore(input, currentElement)
-         input.focus()
 
-      }
-    })
-  })
 
-}
+        //  currentElement.style.display = 'none'
+        //  currentElement.parentNode?. insertBefore(input, currentElement)
+        //  input.focus()
+
+// }
+// })
+// })
+
+// }
 
 

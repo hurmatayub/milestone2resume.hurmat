@@ -11,7 +11,11 @@
 
 <form id="resumeForm">
     <main>
-   
+<!--         
+    <lable for="username">RESUME URL:</lable>
+    <input type="text" id="username" name="username" required /><br><br> -->
+
+
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required></input><br><br>
       
@@ -20,6 +24,10 @@
       
         <label for="contactnumber">Contact Number:</label> <!-- Fix the id for contact number -->
         <input type="contact" id="contactnumber" name="contact" required></input><br><br> <!-- Add id="contactnumber" -->
+
+
+        <lable for="profilephoto">Profile picture</lable>
+        <input type="file" id="profilephoto" name="profilephoto" accept="image/*" required>
       
         <label for="education">Education:</label>
         <textarea type="education" id="education" name="education" required></textarea><br><br>
@@ -29,7 +37,7 @@
       
         <label for="workexperience">Work Experience:</label> <!-- Fix the id for work experience -->
         <textarea type="workexperience" id="workexperience" name="workexperience" required></textarea><br><br>
-        
+
     
     <button type="submit">Generate Resume</button>
 </form>
